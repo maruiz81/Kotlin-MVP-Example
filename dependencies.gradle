@@ -1,0 +1,86 @@
+buildscript {
+    file("dependencies.properties").withReader {
+        Properties properties = new Properties()
+        properties.load(it)
+        project.ext.props = properties
+    }
+
+    // buildscript closure is evaluated first, so we cannot use version variables here
+    ext {
+        benNamesPluginVersion = props.getProperty('benNamesPluginVersion')
+        buildGradlePluginVersion = props.getProperty('buildGradlePluginVersion')
+        googleServicesVersion = props.getProperty('googleServicesVersion')
+        kotlinVersion = props.getProperty('kotlinVersion')
+
+        compileSdkVersion = props.getProperty('compileSdkVersion').toInteger()
+        targetSdkVersion = props.getProperty('targetSdkVersion').toInteger()
+        buildToolsVersion = props.getProperty('buildToolsVersion')
+        minSdkVersion = props.getProperty('minSdkVersion').toInteger()
+
+        versionCode = props.getProperty('versionCode').toInteger()
+        versionName = props.getProperty('versionName')
+
+        projectDependencies = [
+
+                supportAppCompat     :
+                        "com.android.support:appcompat-v7:" + props.getProperty('supportLibraryVersion'),
+                supportDesign        :
+                        "com.android.support:design:" + props.getProperty('supportLibraryVersion'),
+                supportCardView      :
+                        "com.android.support:cardview-v7:" + props.getProperty('supportLibraryVersion'),
+                supportRecyclerView  :
+                        "com.android.support:recyclerview-v7:" + props.getProperty('supportLibraryVersion'),
+                supportGridLayout    :
+                        "com.android.support:gridlayout-v7:" + props.getProperty('supportLibraryVersion'),
+                supportAnnotations   :
+                        "com.android.support:support-annotations:" + props.getProperty('supportLibraryVersion'),
+                advRecyclerView      :
+                        "com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:" + props.getProperty('advRecyclerViewVersion'),
+                anko                 :
+                        "org.jetbrains.anko:anko-common:" + props.getProperty('ankoVersion'),
+                dagger               :
+                        "com.google.dagger:dagger:" + props.getProperty('daggerVersion'),
+                daggerCompiler       :
+                        "com.google.dagger:dagger-compiler:" + props.getProperty('daggerVersion'),
+                gson                 :
+                        "com.google.code.gson:gson:" + props.getProperty('gsonVersion'),
+                kotlinStdLib         :
+                        "org.jetbrains.kotlin:kotlin-stdlib-jre7:" + props.getProperty('kotlinVersion'),
+                playServicesAuth     :
+                        "com.google.android.gms:play-services-auth:" + props.getProperty('googlePlayServicesVersion'),
+                playServicesMaps     :
+                        "com.google.android.gms:play-services-maps:" + props.getProperty('googlePlayServicesVersion'),
+                playServicesPlaces   :
+                        "com.google.android.gms:play-services-places:" + props.getProperty('googlePlayServicesVersion'),
+                recyclerViewRenderers:
+                        "me.alexrs:recyclerview-renderers:" + props.getProperty('recyclerViewRenderersVersion'),
+                retrofit             :
+                        "com.squareup.retrofit2:retrofit:" + props.getProperty('retrofitVersion'),
+                retrofitGson         :
+                        "com.squareup.retrofit2:converter-gson:" + props.getProperty('retrofitVersion'),
+                retrofitRx           :
+                        "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:" + props.getProperty('retrofitRxAdapterVersion'),
+                rxAndroid            :
+                        "io.reactivex.rxjava2:rxandroid:" + props.getProperty('rxAndroidVersion'),
+                rxJava               :
+                        "io.reactivex.rxjava2:rxjava:" + props.getProperty('rxJavaVersion')
+        ]
+
+        projectTestingDependencies = [
+
+                daggerMock     :
+                        "com.github.fabioCollini:DaggerMock:" + props.getProperty('daggerMock'),
+                espresso       :
+                        "com.android.support.test.espresso:espresso-core:" + props.getProperty('espressoVersion'),
+                espressoContrib:
+                        "com.android.support.test.espresso:espresso-contrib:" + props.getProperty('espressoVersion'),
+                hamcrest       :
+                        "org.hamcrest:hamcrest-all:" + props.getProperty('hamcrest'),
+                junit          :
+                        "junit:junit:" + props.getProperty('junit'),
+                mockitoKotlin  :
+                        "com.nhaarman:mockito-kotlin:" + props.getProperty('mockitoKotlin')
+        ]
+
+    }
+}

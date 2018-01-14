@@ -1,13 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        applicationId "maruiz.com.kotlinmvpexample"
-        minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        applicationId "com.maruiz.kotlinmvpexample"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,8 +24,30 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //Support
+    compile projectDependencies.supportAppCompat
+    compile projectDependencies.supportDesign
+
+    //Dagger
+    compile projectDependencies.dagger
+    kapt projectDependencies.daggerCompiler
+
+    //Gson
+    compile projectDependencies.gson
+
+    //Rxjava
+    compile projectDependencies.rxJava
+    compile projectDependencies.rxAndroid
+
+    //Retrofit
+    compile projectDependencies.retrofit
+    compile projectDependencies.retrofitGson
+    compile projectDependencies.retrofitRx
+
+    //Kotlin
+    compile projectDependencies.kotlinStdLib
+    compile projectDependencies.anko
+
+    testCompile projectTestingDependencies.junit
 }
