@@ -2,6 +2,7 @@ package com.maruiz.kotlinmvpexample.presentation.di.component
 
 import com.maruiz.kotlinmvpexample.presentation.di.PerActivity
 import com.maruiz.kotlinmvpexample.presentation.di.module.MainActivityModule
+import com.maruiz.kotlinmvpexample.presentation.view.activity.MainActivity
 
 import dagger.Component
 
@@ -10,5 +11,7 @@ import dagger.Component
  */
 @PerActivity
 @Component(dependencies = [AppComponent::class], modules = [(MainActivityModule::class)])
-interface MainActivityComponent
+interface MainActivityComponent {
+    fun inject(activity: MainActivity)
+}
 

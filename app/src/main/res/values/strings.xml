@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Kotlin MVP Example</string>
+
+    <string name="temperature">%1$dºC</string>
+    <string name="max_temp">Max Temp: %1$dºC</string>
+    <string name="min_temp">Min Temp: %1$dºC</string>
 </resources>

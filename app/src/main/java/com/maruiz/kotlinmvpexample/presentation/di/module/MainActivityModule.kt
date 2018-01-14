@@ -3,6 +3,7 @@ package com.maruiz.kotlinmvpexample.presentation.di.module
 import com.maruiz.kotlinmvpexample.data.api.services.CurrentWeatherService
 import com.maruiz.kotlinmvpexample.domain.interactor.GetWeather
 import com.maruiz.kotlinmvpexample.presentation.di.PerActivity
+import com.maruiz.kotlinmvpexample.presentation.presenter.MainPresenter
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -19,4 +20,8 @@ class MainActivityModule {
     @Provides
     @PerActivity
     fun provideGetFriendsInteractor(currentWeatherService: CurrentWeatherService) = GetWeather(currentWeatherService)
+
+    @Provides
+    @PerActivity
+    fun provideMainActivityPresenter(getWeather: GetWeather) = MainPresenter(getWeather)
 }
