@@ -24,7 +24,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Support
     compile projectDependencies.supportAppCompat
+    compile projectDependencies.supportDesign
 
     //Dagger
     compile projectDependencies.dagger

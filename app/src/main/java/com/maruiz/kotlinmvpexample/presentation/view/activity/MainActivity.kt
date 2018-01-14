@@ -3,6 +3,7 @@ package com.maruiz.kotlinmvpexample.presentation.view.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.maruiz.kotlinmvpexample.R
+import com.maruiz.kotlinmvpexample.presentation.application.KotlinMVPApplication
 import com.maruiz.kotlinmvpexample.presentation.di.component.DaggerMainActivityComponent
 import com.maruiz.kotlinmvpexample.presentation.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -62,7 +63,8 @@ class MainActivity : AppCompatActivity(), MainActivityView {
     }
 
     private fun initializeInjector() {
-        DaggerMainActivityComponent.builder().build().inject(this)
+        DaggerMainActivityComponent.builder().appComponent((this.application as KotlinMVPApplication).appComponent)
+                .build().inject(this)
     }
 
     companion object {
