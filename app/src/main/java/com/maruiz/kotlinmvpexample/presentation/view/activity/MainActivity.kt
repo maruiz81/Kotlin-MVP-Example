@@ -2,6 +2,7 @@ package com.maruiz.kotlinmvpexample.presentation.view.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.maruiz.kotlinmvpexample.R
 import com.maruiz.kotlinmvpexample.presentation.application.KotlinMVPApplication
 import com.maruiz.kotlinmvpexample.presentation.di.component.DaggerMainActivityComponent
@@ -60,6 +61,10 @@ class MainActivity : AppCompatActivity(), MainActivityView {
     override fun onStop() {
         super.onStop()
         presenter.unBind()
+    }
+
+    override fun showError() {
+        Toast.makeText(this, "Error Requesting Data", Toast.LENGTH_LONG).show()
     }
 
     private fun initializeInjector() {

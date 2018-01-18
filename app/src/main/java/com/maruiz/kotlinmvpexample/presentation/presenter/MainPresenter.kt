@@ -31,13 +31,17 @@ class MainPresenter(private val getWeather: GetWeather) {
         view.setMinTemperature(Math.round(currentWeatherModel.main.tempMin))
     }
 
+    private fun showError() {
+        view.showError()
+    }
+
     inner class WeatherObserver : DisposableSingleObserver<CurrentWeatherModel>() {
         override fun onSuccess(weatherModel: CurrentWeatherModel) {
             this@MainPresenter.showWeatherData(weatherModel)
         }
 
         override fun onError(e: Throwable) {
-            e.printStackTrace()
+            this@MainPresenter.showError()
         }
     }
 }

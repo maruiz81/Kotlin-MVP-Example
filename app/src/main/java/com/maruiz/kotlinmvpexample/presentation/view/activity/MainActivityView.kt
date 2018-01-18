@@ -9,4 +9,5 @@ interface MainActivityView {
     fun setTemperature(temperature: Int)
     fun setMinTemperature(minTemperature: Int)
     fun setMaxTemperature(maxTemperature: Int)
+    fun showError()
 }
