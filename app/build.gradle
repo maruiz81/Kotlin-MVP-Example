@@ -50,4 +50,5 @@ dependencies {
     compile projectDependencies.anko
 
     testCompile projectTestingDependencies.junit
+    testCompile projectTestingDependencies.mockitoKotlin
 }
