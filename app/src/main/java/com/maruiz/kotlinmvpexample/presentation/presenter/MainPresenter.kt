@@ -3,7 +3,7 @@ package com.maruiz.kotlinmvpexample.presentation.presenter
 import com.maruiz.kotlinmvpexample.data.model.CurrentWeatherModel
 import com.maruiz.kotlinmvpexample.domain.interactor.GetWeather
 import com.maruiz.kotlinmvpexample.presentation.view.activity.MainActivityView
-import io.reactivex.observers.DisposableObserver
+import io.reactivex.observers.DisposableSingleObserver
 
 /**
  * @author Miguel Angel Ruiz
@@ -31,16 +31,17 @@ class MainPresenter(private val getWeather: GetWeather) {
         view.setMinTemperature(Math.round(currentWeatherModel.main.tempMin))
     }
 
-    inner class WeatherObserver() : DisposableObserver<CurrentWeatherModel>() {
-        override fun onError(e: Throwable) {
-        }
+    private fun showError() {
+        view.showError()
+    }
 
-        override fun onComplete() {
-        }
-
-        override fun onNext(weatherModel: CurrentWeatherModel) {
+    inner class WeatherObserver : DisposableSingleObserver<CurrentWeatherModel>() {
+        override fun onSuccess(weatherModel: CurrentWeatherModel) {
             this@MainPresenter.showWeatherData(weatherModel)
         }
 
+        override fun onError(e: Throwable) {
+            this@MainPresenter.showError()
+        }
     }
 }

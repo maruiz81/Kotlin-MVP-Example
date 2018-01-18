@@ -2,7 +2,7 @@ package com.maruiz.kotlinmvpexample.data.api.services
 
 import com.maruiz.kotlinmvpexample.data.api.API_KEY
 import com.maruiz.kotlinmvpexample.data.model.CurrentWeatherModel
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +12,5 @@ import retrofit2.http.Query
 interface CurrentWeatherService {
 
     @GET("weather?units=metric&apikey=" + API_KEY)
-    fun getCurrentWeather(@Query("q") city: String): Observable<CurrentWeatherModel>
+    fun getCurrentWeather(@Query("q") city: String): Single<CurrentWeatherModel>
 }
