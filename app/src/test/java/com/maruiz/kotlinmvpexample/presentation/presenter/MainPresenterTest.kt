@@ -49,21 +49,27 @@ class MainPresenterTest {
     fun setUp() {
         RxJavaPlugins.setInitIoSchedulerHandler { immediateScheduler }
         mainPresenter = MainPresenter(mockGetWeather)
-    }
 
-    @Test
-    fun testShowingData() {
         mainPresenter.bind(mockView)
         mainPresenter.takeWeather(CITY)
 
         verify(mockGetWeather).execute(capture(getWeatherCaptor), any())
+    }
 
+    @Test
+    fun testShowingDataSuccessfully() {
         val weather = CurrentWeatherModel(name = CITY, main = Main(temp = 5f, tempMin = 3f, tempMax = 15f))
         getWeatherCaptor.value.onSuccess(weather)
         verify(mockView).setCity(weather.name)
         verify(mockView).setTemperature(Math.round(weather.main.temp))
         verify(mockView).setMinTemperature(Math.round(weather.main.tempMin))
         verify(mockView).setMaxTemperature(Math.round(weather.main.tempMax))
+    }
+
+    @Test
+    fun testShowingDataFailed() {
+        getWeatherCaptor.value.onError(Exception())
+        verify(mockView).showError()
     }
 
     @After
